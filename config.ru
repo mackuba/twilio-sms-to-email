@@ -1,4 +1,4 @@
-Dir.mkdir('log')
+Dir.mkdir('log') unless File.directory?('log')
 log = File.new("log/sinatra.log", "a+")
 log.sync = true
 STDERR.reopen(log)
