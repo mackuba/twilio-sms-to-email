@@ -37,4 +37,6 @@ post '/sms' do
   if from && body
     send_mail(from, to, body)
   end
+
+  "<Response></Response>"
 end
