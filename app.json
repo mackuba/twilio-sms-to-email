@@ -1,0 +1,15 @@
+{
+  "name": "Twilio SMS-to-email",
+  "description": "A small Ruby server that receives incoming SMS callbacks from Twilio and forwards the contents to a specified email address.",
+  "repository": "https://github.com/jsuder/twilio-sms-to-email",
+  "env": {
+    "MAIL_FROM": {
+      "description": "The email address that SMS messages will be emailed from.",
+      "required": true
+    },
+    "MAIL_TO": {
+      "description": "The email address that SMS messages will be emailed to.",
+      "required": true
+    }
+  },
+}
