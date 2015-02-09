@@ -11,5 +11,5 @@
       "description": "The email address that SMS messages will be emailed to.",
       "required": true
     }
-  },
+  }
 }
