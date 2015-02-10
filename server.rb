@@ -6,10 +6,29 @@ require 'socket'
 
 Bundler.require
 
-Pony.options = {
-  via: :sendmail,
-  via_options: { arguments: '-i' }
-}
+# use SendGrid?
+pony_options = if ENV['EMAIL_MODE'] == 'sendgrid' then
+                  {
+                    :via => :smtp,
+                    :via_options => {
+                      :address => 'smtp.sendgrid.net',
+                      :port => '587',
+                      :domain => 'heroku.com',
+                      :user_name => ENV['SENDGRID_USERNAME'],
+                      :password => ENV['SENDGRID_PASSWORD'],
+                      :authentication => :plain,
+                      :enable_starttls_auto => true
+                    }
+                  }
+                # otherwise, default to sendmail
+                else
+                  {
+                    via: :sendmail,
+                    via_options: { arguments: '-i' }
+                  }
+                end
+
+Pony.options = pony_options
 
 def send_mail(from, to, body)
   subject = "Twilio SMS gateway: new SMS to #{to}"
