@@ -14,6 +14,10 @@
     "EMAIL_MODE": {
       "value": "sendgrid",
       "required": true
+    },
+    "SENDGRID_DOMAIN": {
+      "value": "heroku.com",
+      "required": true
     }
   },
   "addons": [
