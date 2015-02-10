@@ -10,6 +10,10 @@
     "MAIL_TO": {
       "description": "The email address that SMS messages will be emailed to.",
       "required": true
+    },
+    "EMAIL_MODE": {
+      "value": "sendgrid",
+      "required": true
     }
   },
   "addons": [
