@@ -17,4 +17,4 @@ If you want to deploy the webapp to your Heroku account, simply click the button
 
 ## Credits
 
-Created by [Kuba Suder](http://psionides.eu), licensed under WTFPL License.
+Created by [Kuba Suder](http://mackuba.eu), licensed under VSPL ([Very Simple Public License](https://github.com/mackuba/twilio-sms-to-email/blob/master/VSPL-LICENSE.txt)).
