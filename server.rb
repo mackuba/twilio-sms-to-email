@@ -28,13 +28,26 @@ Pony.options = if ENV['EMAIL_MODE'] == 'sendgrid' then
                   }
                 end
 
+def mail_to(to)
+  return ENV['MAIL_TO'] unless ENV['MAIL_TO'].nil?
+  return "#{login}@#{hostname}" if ENV['NUMBER_TO_EMAIL_MAP'].nil?
+
+  # convert env var into hash
+  h = ENV['NUMBER_TO_EMAIL_MAP'].gsub(/[{}:]/,'')
+                                .gsub(/'/,'')
+                                .split(', ')
+                                .map{|h| h1,h2 = h.split('=>'); {h1.strip! => h2.strip!}}
+                                .reduce(:merge)
+  h[to]
+end
+
 def send_mail(from, to, body)
   subject = "Twilio SMS gateway: new SMS to #{to}"
   content = "Hi,\n\nTwilio SMS gateway at #{Socket.gethostname} has received this SMS to #{to}:\n\n#{body}\n"
 
   $stderr.puts("#{from} -> #{to}: #{body.inspect}")
 
-  Pony.mail(from: settings.mail_from, to: settings.mail_to, subject: subject, body: content)
+  Pony.mail(from: settings.mail_from, to: mail_to(to), subject: subject, body: content)
 end
 
 configure do
@@ -43,7 +56,6 @@ configure do
 
   set :port, ENV['PORT'] || 3000
   set :mail_from, ENV['MAIL_FROM'] || "root@#{hostname}"
-  set :mail_to, ENV['MAIL_TO'] || "#{login}@#{hostname}"
 end
 
 post '/sms' do
