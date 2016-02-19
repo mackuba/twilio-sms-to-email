@@ -8,8 +8,13 @@
       "required": true
     },
     "MAIL_TO": {
-      "description": "The email address that SMS messages will be emailed to.",
-      "required": true
+      "description": "The email address that SMS messages will be emailed to (takes precedence over NUMBER_TO_EMAIL_MAP).",
+      "required": false
+    },
+    "NUMBER_TO_EMAIL_MAP": {
+      "description": "A hash of phone numbers to email addresses that SMS messages will be emailed to (clean out if not using).",
+      "value": "{'+12125556789' => 'test@domain.com', '+13334445555' => 'test@domain.com'}",
+      "required": false
     },
     "EMAIL_MODE": {
       "value": "sendgrid",
